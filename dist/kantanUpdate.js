@@ -469,10 +469,12 @@ kantanUpdate({
 "</div>\n" + 
 "<div id=\"onlineMenu\" class=\"popupMenu\">\n" + 
 "	<ul>\n" + 
-"		<li><a href=\"http://tatesuke.github.io/KanTanMarkdown/ktm.html\" target=\"_blank\">新規作成</a></li>\n" + 
-"		<li><a href=\"http://tatesuke.github.io/KanTanMarkdown/syntax.html\" id=\"helpButton\" target=\"_blank\">（本家）Markdown記法ヘルプ(F1)</a></li>\n" + 
+"		<li><a href=\"https://opengl-8080.github.io/KanTanMarkdownSlide/ktm-std.html\" target=\"_blank\">新規作成</a></li>\n" + 
+"		<li><a href=\"https://github.com/opengl-8080/KanTanMarkdownSlide\" target=\"_blank\">かんたんMarkdownSlide </a></li>\n" + 
+"		<li><a href=\"https://github.com/gnab/remark/wiki/Markdown\" target=\"_blank\">Remark記法ヘルプ(Remark本家Wiki)</a></li>\n" + 
+"		<li><a href=\"https://tatesuke.github.io/KanTanMarkdown/syntax.html\" id=\"helpButton\" target=\"_blank\">(本家) Markdown記法ヘルプ(F1)</a></li>\n" + 
+"		<li><a href=\"https://tatesuke.github.io/KanTanMarkdown/\" target=\"_blank\">(本家) かんたんMarkdown </a></li>\n" + 
 "		<!--li><a href=\"#\" id=\"updateButton\">最新版にアップデート(機能実験中)</a></li 未対応のためコメントアウト-->\n" + 
-"		<li><a href=\"http://tatesuke.github.io/KanTanMarkdown/\" target=\"_blank\">（本家）かんたんMarkdown <span class=\"version\"></span></a></li>\n" + 
 "	</ul>\n" + 
 "</div>\n" + 
 "<div id=\"settingMenu\" class=\"popupMenu\">\n" + 
