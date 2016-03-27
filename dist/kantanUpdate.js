@@ -1,6 +1,12 @@
 kantanUpdate({
 	"newVersion": "v1.20160320.01",
 	"ktmString": "<!--\n" + 
+" * KanTanMarkdownSlide\n" + 
+" * Copyright (c) 2016 opengl-8080\n" + 
+" * Released under the MIT license\n" + 
+" * https://github.com/opengl-8080/KanTanMarkdownSlide/blob/master/LICENSE\n" + 
+" *\n" + 
+" * Original by\n" + 
 " * KanTanMarkdown\n" + 
 " * Copyright (c) 2016 tatesuke\n" + 
 " * Released under the MIT license\n" + 
