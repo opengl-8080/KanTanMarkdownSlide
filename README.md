@@ -1,6 +1,8 @@
 # かんたんMarkdownSlide
 [かんたんMarkdown](https://github.com/tatesuke/KanTanMarkdown) から派生した、スライド作成用の簡易エディタです。
 
+[とりあえず試す](https://opengl-8080.github.io/KanTanMarkdownSlide/ktm-std.html)
+
 # かんたんMarkdownとの違い
 プレビューを、 [Remark](https://github.com/gnab/remark) を使ってスライドで表示するようになっています。  
 それ以外は、基本的にかんたんMarkdownと同じ動作をします。
@@ -8,7 +10,7 @@
 ただし、若干違うところもあります。
 
 ## 本家との違い
-- シーケンス図・フローチャート図の表示
+- シーケンス図・フローチャート図が表示できない
   - 今のところ、これらの機能は正しく動作しません。
   - 単純に移植したところ、図の定義が記載されたページを表示した後でシーケンス図化などをしないとうまく表示できないようです。
   - 有効な対応策が思いつかない限り、たぶんこのままです。
