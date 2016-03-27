@@ -194,11 +194,11 @@
 			
 			hide(attach);
 			hide(editorTabWrapper);
-			document.querySelector("body").classList.add("previewMode");
-			document.querySelector("body").classList.remove("editMode");
 			doPreview();
 			
 			// レイアウト修正
+			document.querySelector("body").classList.add("previewMode");
+			document.querySelector("body").classList.remove("editMode");
 			doLayout();
 			
 			previewer.focus();
@@ -206,8 +206,6 @@
 			// 編集モードへ
 			showBlock(attach);
 			showBlock(editorTabWrapper);
-			document.querySelector("body").classList.remove("previewMode");
-			document.querySelector("body").classList.add("editMode");
 			doPreview();
 			
 			if (isPreviewerOpened == false) {
@@ -215,6 +213,8 @@
 			}
 			
 			// レイアウト修正
+			document.querySelector("body").classList.remove("previewMode");
+			document.querySelector("body").classList.add("editMode");
 			doLayout();
 		}
 		
@@ -1595,7 +1595,7 @@
 	};
 	
 	function isEditMode() {
-		return document.querySelector("body").classList.contains("editMode");
+		return isVisible(document.querySelector("#editorTabWrapper"));
 	}
 	
 	function isDrawMode() {
