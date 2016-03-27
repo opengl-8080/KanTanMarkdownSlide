@@ -48,9 +48,13 @@
  * また、CSSの変更はプレビューしないと反映しません。
  */
 
+/* ネットワークが繋がる環境であれば、等幅フォントとして以下を推奨
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+*/
 
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+.remark-code, .remark-inline-code {
+  font-family: 'Ubuntu Mono', Consolas, 'Courier New', Courier, Monaco, monospace;
+}
 
 body {
   font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;

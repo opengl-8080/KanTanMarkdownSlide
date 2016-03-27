@@ -48,9 +48,13 @@ kantanUpdate({
 " * また、CSSの変更はプレビューしないと反映しません。\n" + 
 " */\n" + 
 "\n" + 
+"/* ネットワークが繋がる環境であれば、等幅フォントとして以下を推奨\n" + 
 "@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);\n" + 
+"*/\n" + 
 "\n" + 
-".remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }\n" + 
+".remark-code, .remark-inline-code {\n" + 
+"  font-family: 'Ubuntu Mono', Consolas, 'Courier New', Courier, Monaco, monospace;\n" + 
+"}\n" + 
 "\n" + 
 "body {\n" + 
 "  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;\n" + 
