@@ -1,5 +1,5 @@
 kantanUpdate({
-	"newVersion": "v1.20160327.01",
+	"newVersion": "v1.20160327.02",
 	"ktmString": "<!--\n" + 
 " * KanTanMarkdownSlide\n" + 
 " * Copyright (c) 2016 opengl-8080\n" + 
@@ -21,7 +21,7 @@ kantanUpdate({
 "<nav>\n" + 
 "	<div id=\"leftNav\">\n" + 
 "		<button id=\"onlineMenuButton\">オンラインメニュー</button><button id=\"settingMenuButton\">設定</button>\n" + 
-"    v1.20160327.01\n" + 
+"    v1.20160327.02\n" + 
 "	</div>\n" + 
 "	<div id=\"rightNav\">\n" + 
 "		<span id=\"messageArea\"></span>\n" + 
@@ -484,7 +484,7 @@ kantanUpdate({
 "</div>\n" + 
 "<div id=\"settingMenu\" class=\"popupMenu\">\n" + 
 "	<ul>\n" + 
-"		<li><input type=\"checkbox\" id=\"settingAutoSync\" checked=\"checked\"><label for=\"settingAutoSync\">自動プレビュー</label></li>\n" + 
+"		<li><input type=\"checkbox\" id=\"settingAutoSync\"><label for=\"settingAutoSync\">自動プレビュー</label></li>\n" + 
 "		<li><input type=\"checkbox\" id=\"settingExpandtab\"><label for=\"settingExpandtab\">タブキーでスペースを挿入</label></li>\n" + 
 "		<li><input type=\"checkbox\" id=\"settingInsertImgTagAfterAttach\"><label for=\"settingInsertImgTagAfterAttach\">画像を添付したらタグを挿入</label></li>\n" + 
 "		<li><input type=\"checkbox\" id=\"settingWide\"><label for=\"settingWide\">16:9</label></li>\n" + 
@@ -573,7 +573,7 @@ kantanUpdate({
 "</div>\n" + 
 "\n" + 
 "</div>\n" + 
-"<input type=\"hidden\" id=\"kantanVersion\" value=\"v1.20160327.01\">\n" + 
+"<input type=\"hidden\" id=\"kantanVersion\" value=\"v1.20160327.02\">\n" + 
 "<input type=\"hidden\" id=\"kantanEdition\" value=\"__KANTAN_EDITION__\">\n" + 
 "<div id=\"updateScriptArea\"></div>\n" + 
 "<script id=\"remarkJs\">\n" + 
