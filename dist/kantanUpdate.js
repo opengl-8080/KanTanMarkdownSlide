@@ -471,7 +471,7 @@ kantanUpdate({
 "	<ul>\n" + 
 "		<li><a href=\"http://tatesuke.github.io/KanTanMarkdown/ktm.html\" target=\"_blank\">新規作成</a></li>\n" + 
 "		<li><a href=\"http://tatesuke.github.io/KanTanMarkdown/syntax.html\" id=\"helpButton\" target=\"_blank\">（本家）Markdown記法ヘルプ(F1)</a></li>\n" + 
-"		<li><a href=\"#\" id=\"updateButton\">最新版にアップデート(機能実験中)</a></li>\n" + 
+"		<!--li><a href=\"#\" id=\"updateButton\">最新版にアップデート(機能実験中)</a></li 未対応のためコメントアウト-->\n" + 
 "		<li><a href=\"http://tatesuke.github.io/KanTanMarkdown/\" target=\"_blank\">（本家）かんたんMarkdown <span class=\"version\"></span></a></li>\n" + 
 "	</ul>\n" + 
 "</div>\n" + 
