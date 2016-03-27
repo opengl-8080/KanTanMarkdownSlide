@@ -312,9 +312,11 @@
     previewerBody.appendChild(textArea);
     
     // script 追加
+    var isWide = document.getElementById('settingWide').checked;
     var buildRemarkScript = previewerDocument.createElement('script');
     buildRemarkScript.type = 'text/javascript';
     buildRemarkScript.innerHTML = 'window.parent.slideshow = remark.create({'
+                                + '  ratio: "' + (isWide ? '16:9' : '4:3') + '",'
                                 + '  highlightLines: true'
                                 + '});';
     previewerBody.appendChild(buildRemarkScript);
@@ -478,6 +480,11 @@
 			baseImage.src= base64;
 		}
 	}
+  
+  /* 縦横比の変更イベントを監視 */
+  on('#settingWide', 'change', function() {
+    doPreview();
+  });
 	
 	/* CSSエディタ変更周り */
 	// エディタに変化があったらプレビュー予約

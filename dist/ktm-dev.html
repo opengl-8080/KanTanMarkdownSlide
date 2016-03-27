@@ -869,6 +869,7 @@ pre tt {
 		<li><input type="checkbox" id="settingAutoSync" checked="checked"><label for="settingAutoSync">自動プレビュー</label></li>
 		<li><input type="checkbox" id="settingExpandtab"><label for="settingExpandtab">タブキーでスペースを挿入</label></li>
 		<li><input type="checkbox" id="settingInsertImgTagAfterAttach"><label for="settingInsertImgTagAfterAttach">画像を添付したらタグを挿入</label></li>
+		<li><input type="checkbox" id="settingWide"><label for="settingWide">16:9</label></li>
 	</ul>
 </div>
 <div id="importDialog">
@@ -2292,9 +2293,11 @@ LetterModeStrategy.prototype = {
     previewerBody.appendChild(textArea);
     
     // script 追加
+    var isWide = document.getElementById('settingWide').checked;
     var buildRemarkScript = previewerDocument.createElement('script');
     buildRemarkScript.type = 'text/javascript';
     buildRemarkScript.innerHTML = 'window.parent.slideshow = remark.create({'
+                                + '  ratio: "' + (isWide ? '16:9' : '4:3') + '",'
                                 + '  highlightLines: true'
                                 + '});';
     previewerBody.appendChild(buildRemarkScript);
@@ -2458,6 +2461,11 @@ LetterModeStrategy.prototype = {
 			baseImage.src= base64;
 		}
 	}
+  
+  /* 縦横比の変更イベントを監視 */
+  on('#settingWide', 'change', function() {
+    doPreview();
+  });
 	
 	/* CSSエディタ変更周り */
 	// エディタに変化があったらプレビュー予約
