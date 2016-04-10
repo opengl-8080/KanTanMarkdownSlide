@@ -1194,6 +1194,8 @@
 			toggleMode();
 		}
     
+    doLayout();
+    
 		return html;
 	}
 
