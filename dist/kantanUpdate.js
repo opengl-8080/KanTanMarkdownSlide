@@ -1,5 +1,5 @@
 kantanUpdate({
-	"newVersion": "v1.20160410.01",
+	"newVersion": "v1.20160418.01",
 	"ktmString": "<!--\n" + 
 " * KanTanMarkdownSlide\n" + 
 " * Copyright (c) 2016 opengl-8080\n" + 
@@ -21,7 +21,7 @@ kantanUpdate({
 "<nav>\n" + 
 "	<div id=\"leftNav\">\n" + 
 "		<button id=\"onlineMenuButton\">オンラインメニュー</button><button id=\"settingMenuButton\">設定</button>\n" + 
-"    v1.20160410.01\n" + 
+"    v1.20160418.01\n" + 
 "	</div>\n" + 
 "	<div id=\"rightNav\">\n" + 
 "		<span id=\"messageArea\"></span>\n" + 
@@ -574,7 +574,7 @@ kantanUpdate({
 "</div>\n" + 
 "\n" + 
 "</div>\n" + 
-"<input type=\"hidden\" id=\"kantanVersion\" value=\"v1.20160410.01\">\n" + 
+"<input type=\"hidden\" id=\"kantanVersion\" value=\"v1.20160418.01\">\n" + 
 "<input type=\"hidden\" id=\"kantanEdition\" value=\"__KANTAN_EDITION__\">\n" + 
 "<div id=\"updateScriptArea\"></div>\n" + 
 "<script id=\"remarkJs\">\n" + 
