@@ -396,7 +396,7 @@ nav:after {
 <nav>
 	<div id="leftNav">
 		<button id="onlineMenuButton">オンラインメニュー</button><button id="settingMenuButton">設定</button>
-    v1.20160410.01
+    v1.20160418.01
 	</div>
 	<div id="rightNav">
 		<span id="messageArea"></span>
@@ -861,6 +861,7 @@ pre tt {
 	<ul>
 		<li><input type="checkbox" id="settingAutoSync"><label for="settingAutoSync">自動プレビュー</label></li>
 		<li><input type="checkbox" id="settingExpandtab"><label for="settingExpandtab">タブキーでスペースを挿入</label></li>
+		<li><input type="checkbox" id="settingAutoCloseTab"><label for="settingAutoCloseTab">`/`を入力したときに閉じタグを自動挿入</label></li>
 		<li><input type="checkbox" id="settingInsertImgTagAfterAttach"><label for="settingInsertImgTagAfterAttach">画像を添付したらタグを挿入</label></li>
 		<li><input type="checkbox" id="settingWide"><label for="settingWide">16:9</label></li>
 	</ul>
@@ -948,7 +949,7 @@ pre tt {
 </div>
 
 </div>
-<input type="hidden" id="kantanVersion" value="v1.20160410.01">
+<input type="hidden" id="kantanVersion" value="v1.20160418.01">
 <input type="hidden" id="kantanEdition" value="dev">
 <div id="updateScriptArea"></div>
 <script id="remarkJs">
@@ -1187,6 +1188,92 @@ function toKantanEditor(editor) {
 			saveUndo(e.target);
 		}
 	});
+
+	/* /キーで閉じタグを入力 */
+	on(editor, 'keydown', function(e) {
+		// `/`キー以外なら終了
+		if (((e.which != 191) && (e.keyCode != 191)) 
+				|| (e.shiftKey || e.ctrlKey || e.metaKey || e.altKey)) {
+			return true;
+		}
+		
+		// 閉じタグ挿入がoffなら終了
+		if (!document.querySelector("#settingAutoCloseTab").checked) {
+			return true;
+		}
+		
+		// 一文字前が`<`以外だったら終了
+		var editor = e.target;
+		var pos = editor.selectionStart - 1;
+		if ((pos < 0) || (editor.value.charAt(pos) != "<")) {
+			return true;
+		}
+		pos--;
+		
+		// 一文字ずつ遡りながら直近の閉じてないタグを探す
+		var unclosedTagName = null;
+		var closeTagStack = [""];
+		while (0 <= pos) {
+			if (editor.value.charAt(pos) != "<") {
+				pos--;
+				continue;
+			}
+			
+			var isCloseTag;
+			var tagNamePos;
+			if (editor.value.charAt(pos + 1) == "/") {
+				isCloseTag = true;
+				tagNamePos = pos + 2;
+			} else {
+				isCloseTag = false;
+				tagNamePos = pos + 1;
+			}
+			
+			var currentTagName = getTagNameAt(editor, tagNamePos);
+			
+			if (isCloseTag) {
+				closeTagStack.push(currentTagName);
+			} else {
+				if (currentTagName == closeTagStack[closeTagStack.length - 1]) {
+					closeTagStack.pop();
+				} else {
+					unclosedTagName = currentTagName;
+					break;
+				}
+			}
+		
+			pos--;
+		}
+		
+		if (unclosedTagName == null) {
+			return true;
+		} else {
+			e.preventDefault();
+			var insertText = "/" + unclosedTagName + ">";
+			var newPos = editor.selectionStart + insertText.length;
+			var part1 = editor.value.substring(0, editor.selectionStart);
+			var part2 = editor.value.substr(editor.selectionEnd);
+			editor.value = part1 + insertText + part2;
+			
+			editor.selectionStart = newPos;
+			editor.selectionEnd = newPos;
+			updateScrollPos(e.target);
+			
+			saveUndo(e.target);
+			return false;
+		}
+	});
+	
+	function getTagNameAt(editor, pos) {
+		var tagName = "";
+		var c = editor.value.charAt(pos);
+		while ((c != ">") && (c != " ")) {
+			tagName = tagName + c;
+			pos++;
+			c = editor.value.charAt(pos);
+		}
+		return tagName;
+	}
 
 	/* Undo, Redo */
 	var isCtrlVDowning = false;
@@ -2120,9 +2207,7 @@ LetterModeStrategy.prototype = {
 	// 現在のところチェックボックスのみなので
 	// チェックボックスに特化して実装している
 	var saveValueElements = document.querySelectorAll(
-			"#settingAutoSync," + 
-			"#settingExpandtab," + 
-			"#settingInsertImgTagAfterAttach");
+			"#settingMenu input[type=checkbox]");
 	for (var i = 0; i < saveValueElements.length; i++) {
 		var element = saveValueElements[i];
 		var savedValue = getItem(element.id, null);
@@ -2815,6 +2900,18 @@ LetterModeStrategy.prototype = {
 		trimScript.innerHTML = trimInfo;
 		li.appendChild(trimScript);
 		
+		var upButton = document.createElement("button");
+		addClass(upButton, 'upButton');
+		upButton.innerHTML = "↑";
+		on(upButton, "click", onUpButtonClicked);
+		li.appendChild(upButton);
+		
+		var downButton = document.createElement("button");
+		addClass(downButton, 'downButton');
+		downButton.innerHTML = "↓";
+		on(downButton, "click", onDownButtonClicked);
+		li.appendChild(downButton);
+		
 		var input  = document.createElement("input");
 		input.type = "text";
 		addClass(input, 'fileName');
@@ -2906,6 +3003,27 @@ LetterModeStrategy.prototype = {
 		return blob;
 	}
 
+	/* 添付ファイル並び替え */
+	on(".upButton", "click", onUpButtonClicked);
+	function onUpButtonClicked(e) {
+		var currentLi = e.target.parentNode;
+		var previousLi = currentLi.previousElementSibling;
+		if (previousLi) {
+			var ul = currentLi.parentNode;
+			ul.insertBefore(currentLi, previousLi);
+		}
+	}
+	
+	on(".downButton", "click", onDownButtonClicked);
+	function onDownButtonClicked(e) {
+		var currentLi = e.target.parentNode;
+		var nextLi = currentLi.nextElementSibling;
+		if (nextLi) {
+			var ul = currentLi.parentNode;
+			ul.insertBefore(nextLi, currentLi);
+		}
+	}
+	
 	/* ファイル削除 */
 	on(".detachButton", "click", onDetachButtonClicked);
 	function onDetachButtonClicked(e) {
