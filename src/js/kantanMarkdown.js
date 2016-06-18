@@ -117,13 +117,26 @@
 			"#settingMenu input[type=checkbox]");
 	for (var i = 0; i < saveValueElements.length; i++) {
 		var element = saveValueElements[i];
-		var savedValue = getItem(element.id, null);
-		if (savedValue != null) {
-			element.checked = (savedValue == "true");
+
+		if (element.id === 'settingWide') {
+			// 縦横比はローカルストレージには保存せず、直接ファイルに書き出す
+			on (element, "change", function() {
+				if (this.checked) {
+					this.setAttribute('checked', 'checked');
+				} else {
+					this.removeAttribute('checked');
+				}
+			});
+		} else {
+			// それ以外はローカルストレージに保存
+			var savedValue = getItem(element.id, null);
+			if (savedValue != null) {
+				element.checked = (savedValue == "true");
+			}
+			on (element, "change", function() {
+				setItem(this.id, this.checked);
+			});
 		}
-		on (element, "change", function() {
-			setItem(this.id, this.checked);
-		});
 	}
 	
 	function getItem(name, defaultValue) {
