@@ -33,6 +33,9 @@ http://tatesuke.github.io/KanTanMarkdown/
 余裕があれば対応しますが、迅速な対応はできない可能性が高いです。
 
 ## リリースノート
+### v1.20160619.03
+* 機能修正 [#11](https://github.com/opengl-8080/KanTanMarkdownSlide/issues/11)
+
 ### v1.20160619.02
 * バグ修正 [#6](https://github.com/opengl-8080/KanTanMarkdownSlide/issues/6)
 
