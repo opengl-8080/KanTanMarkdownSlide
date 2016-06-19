@@ -256,7 +256,7 @@
 			addClass(document.querySelector("body"), "previewMode");
 			removeClass(document.querySelector("body"), "editMode");
 			doLayout();
-			
+
 			previewer.focus();
 		} else {
 			// 編集モードへ
@@ -458,6 +458,12 @@
     if (typeof pageNumber !== 'undefined' && window.slideshow) {
       slideshow.gotoSlide(pageNumber);
     }
+
+		// メニューバーの表示切り替え
+		var hideMenuBar = document.getElementById('settingHideMenuBarAtPreview').checked;
+		var menuBarStyle = (!isEditMode() && hideMenuBar) ? 'none' : 'block';
+
+		document.getElementById('menuBar').style.display = menuBarStyle;
 	}
 	
 	function replaceAttachURL(str) {
