@@ -396,7 +396,7 @@ nav:after {
 <nav>
 	<div id="leftNav">
 		<button id="onlineMenuButton">オンラインメニュー</button><button id="settingMenuButton">設定</button>
-    v1.20160619.01
+    v1.20160619.02
 	</div>
 	<div id="rightNav">
 		<span id="messageArea"></span>
@@ -949,7 +949,7 @@ pre tt {
 </div>
 
 </div>
-<input type="hidden" id="kantanVersion" value="v1.20160619.01">
+<input type="hidden" id="kantanVersion" value="v1.20160619.02">
 <input type="hidden" id="kantanEdition" value="dev">
 <div id="updateScriptArea"></div>
 <script id="remarkJs">
@@ -3588,6 +3588,12 @@ LetterModeStrategy.prototype = {
 				continue;
 			}
 			
+			if (line.match(/^-{2}$/)) {
+				// remark は -- でページ切り替えになるので、ダミーの Heading を追加して帳尻を合わせる
+				newLines.push('# dummy');
+				continue;
+			}
+
 			if (line.match(/^#{1,6}\s(.+)$/)
 				|| line.match(/^<h[1-6]>(.*)$/)) {
 				newLines.push("# " + RegExp.$1);

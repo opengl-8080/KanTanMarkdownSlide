@@ -1495,6 +1495,12 @@
 				continue;
 			}
 			
+			if (line.match(/^-{2}$/)) {
+				// remark は -- でページ切り替えになるので、ダミーの Heading を追加して帳尻を合わせる
+				newLines.push('# dummy');
+				continue;
+			}
+
 			if (line.match(/^#{1,6}\s(.+)$/)
 				|| line.match(/^<h[1-6]>(.*)$/)) {
 				newLines.push("# " + RegExp.$1);
