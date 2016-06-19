@@ -336,6 +336,8 @@
     newPreviewer.id = 'previewer';
     wrapper.appendChild(newPreviewer);
     
+		setupHeadingSyncEventHandling();
+
     var previewerDocument = newPreviewer.contentDocument;
     previewerDocument.open();
     previewerDocument.write('<head></head><body></body>'); // firefox ではこうしないと body を書き出せない
@@ -1306,19 +1308,23 @@
 	/* 見出し同期 */
 	on("#headingSyncButton", "click", headingSyncToPreviewer);
 
-	on("#previewer", "previewed", function(e) {
-		if (isEditMode()) {
-			var headings = document.getElementById("previewer").contentDocument.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
-			for (var i = 0; i < headings.length; i++) {
-				// 見出しにイベントを設定する。メモリリーク対策でプレビュー時に
-				// イベントを外しやすくするために、on**で実装する。 
-				headings[i].onmouseover = function() {
-					this.style.cursor = "pointer";
-				};
-				headings[i].onclick = headingSyncToEditor;
+	setupHeadingSyncEventHandling();
+
+	function setupHeadingSyncEventHandling() {
+		on("#previewer", "previewed", function(e) {
+			if (isEditMode()) {
+				var headings = document.getElementById("previewer").contentDocument.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
+				for (var i = 0; i < headings.length; i++) {
+					// 見出しにイベントを設定する。メモリリーク対策でプレビュー時に
+					// イベントを外しやすくするために、on**で実装する。 
+					headings[i].onmouseover = function() {
+						this.style.cursor = "pointer";
+					};
+					headings[i].onclick = headingSyncToEditor;
+				}
 			}
-		}
-	});
+		});
+	}
 	
 	on("#previewer", "prepreview", function(e) {
 		var headings = document.getElementById("previewer").contentDocument.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -1489,13 +1495,6 @@
 				continue;
 			}
 			
-			if (line.match(/^={2,}$|^-{2,}$/)
-					&& !newLines[i - 1].match(/^#{1,6}\s(.+)$/)
-					&& (newLines[i - 1] != "")) {
-				newLines[i - 1] = "# " + newLines[i - 1];
-				newLines.push("");
-				continue;
-			}
 			if (line.match(/^#{1,6}\s(.+)$/)
 				|| line.match(/^<h[1-6]>(.*)$/)) {
 				newLines.push("# " + RegExp.$1);
